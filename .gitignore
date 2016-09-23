@@ -12,3 +12,10 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+
+/node_modules
+/npm-debug.log
+*_bundle.js
+*_bundle.js.map
+
+.DS_Store
