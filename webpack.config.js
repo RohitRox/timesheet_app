@@ -3,19 +3,24 @@ var path = require('path');
 
 var BUILD_DIR = path.resolve(__dirname, 'app/assets/javascripts');
 var APP_DIR = path.resolve(__dirname, 'frontend');
+var NODE_MODULES_DIR = path.resolve(__dirname, 'node_modules');
 
 var config = {
-  entry: APP_DIR + '/app.jsx',
+  entry: path.resolve(APP_DIR, 'app'),
   output: {
     path: BUILD_DIR,
     filename: 'app_bundle.js'
   },
+  resolve: {
+    root: [APP_DIR, NODE_MODULES_DIR],
+    extensions: ['', '.js', '.jsx'],
+  },
   module : {
     loaders : [
       {
-        test : /\.jsx?/,
-        include : APP_DIR,
-        loader : 'babel'
+        test : /(\.jsx|\.js)$/,
+        loaders : ['babel', 'eslint-loader'],
+        exclude: NODE_MODULES_DIR
       }
     ]
   }

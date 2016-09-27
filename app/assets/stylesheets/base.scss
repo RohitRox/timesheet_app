@@ -1,0 +1,47 @@
+.container {
+  width: 1024px;
+  margin: 0 auto;
+}
+table {
+  width: 100%;
+}
+input {
+  width: 100%;
+}
+.ts {
+  font-family: verdana,arial,sans-serif;
+  font-size:11px;
+  color:#333333;
+  border-width: 1px;
+  border-color: #666666;
+  border-collapse: collapse;
+}
+.ts th {
+  border-width: 1px;
+  padding: 8px;
+  border-style: solid;
+  border-color: #666666;
+  background-color: #dedede;
+}
+.ts td {
+  border-width: 1px;
+  padding: 8px;
+  border-style: solid;
+  border-color: #666666;
+  background-color: #ffffff;
+}
+.text-right {
+  text-align: right;
+}
+.text-left {
+  text-align: left;
+}
+.sign {
+  vertical-align: top;
+  td {
+    padding-top: 40px;
+  }
+  h2 {
+    border-top: 2px solid;
+  }
+}
