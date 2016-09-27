@@ -1,6 +1,25 @@
 import React from 'react';
+import DatePicker from 'react-datepicker';
+import Moment from 'moment';
 
 export default class SheetInfo extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this._handleChange = this.handleChange.bind(this);
+
+    this.state = {
+      startDate: Moment()
+    };
+  }
+
+  handleChange(date) {
+    this.setState({
+      startDate: date
+    });
+    this.props.onDateSelect(date);
+  }
+
   render() {
     return <tr>
       <td colSpan="2">
@@ -11,7 +30,13 @@ export default class SheetInfo extends React.Component {
           </tr>
           <tr>
             <td>For week ending</td>
-            <td><input type="text" /></td>
+            <td>
+              <DatePicker
+                dateFormat="MM/DD/YYYY"
+                selected={this.state.startDate}
+                onChange={this._handleChange}
+              />
+            </td>
           </tr>
           <tr>
             <td>Client</td>
