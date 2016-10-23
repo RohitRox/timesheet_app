@@ -1,25 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import DatePicker from 'react-datepicker';
-import Moment from 'moment';
 
-export default class SheetInfo extends React.Component {
-  constructor(props) {
-    super(props);
+import { updateDate } from '../actions/timetable';
 
-    this._handleChange = this.handleChange.bind(this);
-
-    this.state = {
-      startDate: Moment()
-    };
-  }
-
-  handleChange(date) {
-    this.setState({
-      startDate: date
-    });
-    this.props.onDateSelect(date);
-  }
-
+export class SheetInfo extends React.Component {
   render() {
     return <tr>
       <td colSpan="2">
@@ -33,8 +18,8 @@ export default class SheetInfo extends React.Component {
             <td>
               <DatePicker
                 dateFormat="MM/DD/YYYY"
-                selected={this.state.startDate}
-                onChange={this._handleChange}
+                selected={this.props.currrentDate}
+                onChange={this.props.updateDate}
               />
             </td>
           </tr>
@@ -48,3 +33,17 @@ export default class SheetInfo extends React.Component {
     </tr>;
   }
 }
+
+function mapStateToProps(state) {
+  return { currrentDate: state.timetable.date }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    updateDate: function(date) {
+      dispatch(updateDate(date));
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SheetInfo);

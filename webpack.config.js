@@ -19,7 +19,7 @@ var config = {
     loaders : [
       {
         test : /(\.jsx|\.js)$/,
-        loaders : ['babel', 'eslint-loader'],
+        loaders : ['babel'],
         exclude: NODE_MODULES_DIR
       }
     ]

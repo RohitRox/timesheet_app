@@ -1,27 +1,53 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-export default class Timetable extends React.Component {
+import TimetableRow from './timetableRow';
+import { updateTimetable, toggleRowStatus } from '../actions/timetable';
+
+export class Timetable extends React.Component {
+  constructor(props) {
+    super(props);
+    this.onTimeChange = this._onTimeChange.bind(this);
+    this.toggleRowStatus = this._toggleRowStatus;
+  }
+
   getDayRows() {
-    const startDate = this.props.startOfWeek;
-    const endDate = this.props.endOfWeek;
-    let dayRows = [];
-
-    for (startDate; startDate.isBefore(endDate); startDate.add(1, 'days')) {
-      dayRows.push(
-        <tr>
-          <td>{startDate.format("MM/DD/YYYY")}</td>
-          <td>{startDate.format('dddd')}</td>
-          <td></td>
-          <td></td>
-          <td className="break"></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
+    let rows = [];
+    for(let key in this.props.rowObjects){
+      const rowObj = this.props.rowObjects[key];
+      rows.push(
+        <TimetableRow
+          rowObject={rowObj}
+          day={key}
+          onTimeChange={this.onTimeChange}
+          toggleRowStatus={this.toggleRowStatus.bind(this, key)}  />
       );
     }
-    return dayRows;
+    return rows;
+  }
+
+  _onTimeChange(e) {
+    const value = e.target.value;
+    const day = e.target.getAttribute('rel');
+    const timeFor = e.target.getAttribute('name');
+    this.props.updateTimetable({
+      value: value,
+      day: day,
+      timeFor: timeFor
+    });
+  }
+
+  _toggleRowStatus(day) {
+    this.props.toggleRowStatus(day);
+  }
+
+  getTotal() {
+    const totalsArray = Object.values(this.props.rowObjects).map((row) => {
+      return row.disabled ? 0 : row.total;
+    });
+    return totalsArray.reduce(function(prev,current){
+      return prev+current;
+    });
   }
 
   render() {
@@ -48,7 +74,7 @@ export default class Timetable extends React.Component {
             <td></td>
             <td></td>
             <td><b>Weekly Total</b></td>
-            <td><b>40.00</b></td>
+            <td><b>{this.getTotal()} Hrs</b></td>
             <td></td>
           </tr>
         </table>
@@ -56,3 +82,20 @@ export default class Timetable extends React.Component {
     </tr>;
   }
 }
+
+function mapStateToProps(state) {
+  return { rowObjects: state.timetable.rowObjects }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    updateTimetable: function(args) {
+      dispatch(updateTimetable(args))
+    },
+    toggleRowStatus: function(day) {
+      dispatch(toggleRowStatus(day))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Timetable);
