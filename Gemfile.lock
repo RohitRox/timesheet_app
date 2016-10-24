@@ -39,9 +39,16 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     arel (7.1.2)
+    bcrypt (3.1.11)
     builder (3.2.2)
+    clearance (1.15.1)
+      bcrypt
+      email_validator (~> 1.4)
+      rails (>= 3.1)
     coderay (1.1.1)
     concurrent-ruby (1.0.2)
+    email_validator (1.6.0)
+      activemodel
     erubis (2.7.0)
     execjs (2.7.0)
     ffi (1.9.14)
@@ -138,6 +145,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  clearance
   haml
   pg (~> 0.18)
   pry

@@ -1,6 +1,18 @@
+body{
+  font-family: verdana,arial,sans-serif;
+  margin: 0;
+  padding: 0;
+}
 .container {
   width: 1024px;
   margin: 0 auto;
+}
+.signed-out {
+  background: url(app-bg.png) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 table {
   width: 100%;
@@ -8,11 +20,10 @@ table {
 input {
   width: 100%;
 }
-input[type="checkbox"] {
+input[type="checkbox"], input[type="button"], input[type="submit"] {
   width: auto;
 }
 .ts {
-  font-family: verdana,arial,sans-serif;
   font-size:11px;
   color:#333333;
   border-width: 1px;
@@ -51,9 +62,17 @@ input[type="checkbox"] {
     border-top: 2px solid;
   }
 }
+#flash {
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+  width: 100%;
+  padding: 8px;
+  background: rgb(107, 177, 253);
+}
 
 @media print {
-  .no-print {
+  .no-print, #flash {
     display: none !important;
     height: 0;
   }

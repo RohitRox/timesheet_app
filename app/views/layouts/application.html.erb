@@ -7,8 +7,15 @@
     <%= stylesheet_link_tag    'application', media: 'all' %>
   </head>
 
-  <body>
+  <body class="<%= signed_in? ? 'signed-in' : 'signed-out' %>">
     <%= yield %>
+    <% if flash.present? %>
+      <div id="flash">
+        <% flash.each do |key, value| -%>
+          <div id="flash_<%= key %>"><%=h value %></div>
+        <% end %>
+      </div>
+    <% end %>
     <%= javascript_include_tag 'application' %>
   </body>
 </html>
