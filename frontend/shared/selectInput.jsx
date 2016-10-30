@@ -15,7 +15,7 @@ export default class SelectInput extends React.Component {
       return <option value={optionObj.value || optionObj.label}>{optionObj.label}</option>
     });
 
-    return <select defaultValue={this.props.selected} onChange={this.props.onChange} name={this.props.name} rel={this.props.rel}>
+    return <select value={this.props.selected} onChange={this.props.onChange} name={this.props.name} rel={this.props.rel}>
       { options }
     </select>;
   }
