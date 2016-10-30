@@ -5,11 +5,15 @@ import SelectInput from '../shared/selectInput';
 export default class TimetableRow extends React.Component {
   getSelectField(name, value) {
     return (
-      <SelectInput
-        rel={this.props.day}
-        selected={this.props.rowObject[name]}
-        onChange={this.props.onTimeChange}
-        name={name} />
+      <div>
+        <SelectInput
+          rel={this.props.day}
+          selected={this.props.rowObject[name]}
+          onChange={this.props.onTimeChange}
+          name={name}
+          className="no-print" />
+        <span className="print">{this.props.rowObject[name]}</span>
+      </div>
     );
   }
 

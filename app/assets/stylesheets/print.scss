@@ -1,0 +1,15 @@
+.print {
+  display: none;
+}
+@media print {
+  body {
+    -webkit-print-color-adjust: exact;
+  }
+  .no-print, #flash {
+    display: none !important;
+    height: 0;
+  }
+  .print {
+    display: block;
+  }
+}

@@ -70,10 +70,3 @@ input[type="checkbox"], input[type="button"], input[type="submit"] {
   padding: 8px;
   background: rgb(107, 177, 253);
 }
-
-@media print {
-  .no-print, #flash {
-    display: none !important;
-    height: 0;
-  }
-}
